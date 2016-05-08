@@ -85,6 +85,15 @@
     <EmbeddedResource Include="ProtocolManagement.resx">
       <DependentUpon>ProtocolManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\AnalyzeLibrary.Algorithm.datasource" />
+    <None Include="Properties\DataSources\AnalyzeLibrary.Analyze.datasource" />
+    <None Include="Properties\DataSources\AnalyzeLibrary.file.DirFileHelper.datasource" />
+    <None Include="Properties\DataSources\AnalyzeLibrary.IAlgorithm.datasource" />
+    <None Include="Properties\DataSources\AnalyzeLibrary.protocol.Protocol.datasource" />
+    <None Include="Properties\DataSources\AnalyzeLibrary.protocol.ProtocolFrame.datasource" />
+    <None Include="Properties\DataSources\AnalyzeLibrary.protocol.ProtocolFrameItem.datasource" />
+    <None Include="Properties\DataSources\AnalyzeLibrary.result.AnalyzeResult.datasource" />
+    <None Include="Properties\DataSources\AnalyzeLibrary.Util.XmlUtil.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
