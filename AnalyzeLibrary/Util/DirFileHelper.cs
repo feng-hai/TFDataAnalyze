@@ -592,8 +592,8 @@ namespace AnalyzeLibrary.file
 
         #region 获取文件字符串
         /// <summary>
-        /// 获取一个文件的长度,单位为Byte
-        /// </summary>
+        ///  获取文件字符串
+        /// </summary 
         /// <param name="filePath">文件的绝对路径</param>        
         public static string GetFileStr(string filePath)
         {

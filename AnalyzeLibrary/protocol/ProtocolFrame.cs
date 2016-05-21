@@ -10,7 +10,8 @@ namespace AnalyzeLibrary.protocol
     {
 
         private string frameId;
-        private List<ProtocolFrameItem> frameItemList;
+        private string frameName;
+        private List<ProtocolFrameItem> frameItemList=new List<ProtocolFrameItem> ();
         /// <summary>
         /// 协议帧Id
         /// </summary>
@@ -41,6 +42,20 @@ namespace AnalyzeLibrary.protocol
                 frameItemList = value;
             }
         }
+
+        public string FrameName
+        {
+            get
+            {
+                return frameName;
+            }
+
+            set
+            {
+                frameName = value;
+            }
+        }
+
         /// <summary>
         /// 判断帧数据是否合法
         /// </summary>

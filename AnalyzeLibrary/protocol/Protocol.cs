@@ -21,13 +21,16 @@ namespace AnalyzeLibrary.protocol
     public class Protocol
     {
         private string name;
-        private List<ProtocolFrame> frameList;
+        private List<ProtocolFrame> frameList=new List<ProtocolFrame> ();
         private string url;
+        private string description;
 
 
         public Protocol(string url)
         {
-            this.url = url;
+            this.Url = url;
+
+         
         }
         public Protocol() {
 
@@ -66,9 +69,46 @@ namespace AnalyzeLibrary.protocol
             }
         }
 
+        public string Url
+        {
+            get
+            {
+                return url;
+            }
+
+            set
+            {
+                url = value;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+
+            set
+            {
+                description = value;
+            }
+        }
+
         public void saveFile()
         {
-            DirFileHelper.CreateFile(url, this.ToString());
+            DirFileHelper.CreateFile(Url, this.ToString());
+        }
+        public void DeleteFile()
+        {
+            var oldName = AnalyzeLibrary.file.DirFileHelper.GetFileNameNoExtension(Url);
+            var temp = System.IO.Directory.GetCurrentDirectory() + @"\back\"+DirFileHelper.GetDateDir();
+            if(!DirFileHelper.IsExistDirectory(temp))
+            {
+                DirFileHelper.CreateDirectory(temp);
+            }
+          
+            DirFileHelper.MoveFile(Url, temp+@"\"  + oldName + ".xml");
         }
         /// <summary>
         /// ÐòÁÐ»¯Îªxml×Ö·û´®
