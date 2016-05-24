@@ -249,9 +249,9 @@ namespace AnalyzeForm
             }
 
             pro1.saveFile();
-            int temp = _selIndex;
+            ; string temp = textBox1.Text;
             initListbox(false);
-            listBox1.SelectedIndex = temp;
+            listBox1.SelectedValue=temp;
             MessageBox.Show("协议帧保存成功！");
 
 

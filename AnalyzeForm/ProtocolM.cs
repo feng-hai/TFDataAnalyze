@@ -77,9 +77,9 @@ namespace AnalyzeForm
             }
             pro.saveFile();
 
-            int temp = _selIndex;
+            string temp = textBox1.Text;
             initProtocol();
-            listBox1.SelectedIndex = temp;
+            listBox1.SelectedValue =temp ;
             MessageBox.Show("保存协议成功");
         }
         /// <summary>
