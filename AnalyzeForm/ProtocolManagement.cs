@@ -67,6 +67,7 @@ namespace AnalyzeForm
 
         }
         int _selIndex = -1;
+        bool isNew = true;
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -76,6 +77,11 @@ namespace AnalyzeForm
 
             if (listBox1.SelectedValue != null && listBox1.SelectedIndex != -1)
             {
+                if (isNew && listBox1.SelectedIndex == 0)
+                {
+                    isNew = false;
+                    return;
+                }
                 ProtocolFrame curItem = (ProtocolFrame)listBox1.SelectedItem;
 
                 textBox1.Text = curItem.FrameId;
@@ -90,10 +96,9 @@ namespace AnalyzeForm
 
                     createConttrol(panel1, item);
                 }
-
+            
             }
             _selIndex = listBox1.SelectedIndex;
-
             // Get the currently selected item in the ListBox.
 
 
@@ -160,10 +165,21 @@ namespace AnalyzeForm
         BindingList<ProtocolFrame> frameList;
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            _selIndex = -1;
+            initListbox(true);
+
+
+        }
+
+        private void initListbox(bool isClear)
+        {
             var curItem = (Info)comboBox1.SelectedItem;
-            textBox1.Text = "";
-           
-            panel1.Controls.Clear();
+            if (isClear)
+            {
+                textBox1.Text = "";
+                panel1.Controls.Clear();
+
+            }
             frameId = 0;
             if (curItem.Id != "")
             {
@@ -177,9 +193,16 @@ namespace AnalyzeForm
                 listBox1.DataSource = frameList;
                 listBox1.ValueMember = "FrameId";
                 listBox1.DisplayMember = "FrameId";
+                //if (listBox1.Items.Count > 0)
+                //{
+
+
+                //    listBox1.ClearSelected();
+                  
+
+                //    listBox1.SelectedIndex = _selIndex;
+                //}
             }
-
-
         }
         //保持帧
         private void button4_Click(object sender, EventArgs e)
@@ -194,7 +217,7 @@ namespace AnalyzeForm
                     if (cc is TextBox)
                     {
                         var tempName = cc.Name.Substring(cc.Name.LastIndexOf('_')
-                            +1);
+                            + 1);
                         ProtocolFrameItem item = new ProtocolFrameItem();
                         string value = ((TextBox)cc).Text;
                         switch (tempName)
@@ -216,16 +239,20 @@ namespace AnalyzeForm
                                 break;
 
                         }
-                        if(item.Name!=null)
+                        if (item.Name != null)
                         {
                             curItem.FrameItemList.Add(item);
                         }
-                        
+
                     }
                 }
             }
 
             pro1.saveFile();
+            int temp = _selIndex;
+            initListbox(false);
+            listBox1.SelectedIndex = temp;
+            MessageBox.Show("协议帧保存成功！");
 
 
         }
@@ -236,6 +263,7 @@ namespace AnalyzeForm
             frame.FrameId = "test";
             frameList.Add(frame);
             pro1.saveFile();
+            MessageBox.Show("新增协议帧成功 ！");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -243,6 +271,7 @@ namespace AnalyzeForm
             ProtocolFrame curItem = (ProtocolFrame)listBox1.SelectedItem;
             frameList.Remove(curItem);
             pro1.saveFile();
+            MessageBox.Show("删除协议帧成功 ！");
 
         }
     }

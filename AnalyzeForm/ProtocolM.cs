@@ -22,22 +22,29 @@ namespace AnalyzeForm
         BindingList<Protocol> protocolList;
         private void ProtocolM_Load(object sender, EventArgs e)
         {
+            initProtocol();
+        }
+        private void initProtocol() {
+
+
             string[] protocols = AnalyzeLibrary.file.DirFileHelper.GetFileNames(System.IO.Directory.GetCurrentDirectory() + @"\resource", "*.xml", true);
 
             IList<Protocol> infoList = new List<Protocol>();
 
             foreach (string str in protocols)
             {
-                Protocol inf = (Protocol)AnalyzeLibrary.Util.XmlUtil.Deserialize(typeof(Protocol), DirFileHelper.GetFileStr(str) ); ;
-             
+                Protocol inf = (Protocol)AnalyzeLibrary.Util.XmlUtil.Deserialize(typeof(Protocol), DirFileHelper.GetFileStr(str)); ;
+
                 infoList.Add(inf);
             };
             protocolList = new BindingList<Protocol>(infoList);
-            
+
             listBox1.DataSource = protocolList;
             listBox1.ValueMember = "Url";
             listBox1.DisplayMember = "Name";
         }
+
+
         int _selIndex = -1;
         Protocol pro;
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -69,6 +76,11 @@ namespace AnalyzeForm
                 pro.Url = System.IO.Directory.GetCurrentDirectory() + @"\resource\" + pro.Name + ".xml";
             }
             pro.saveFile();
+
+            int temp = _selIndex;
+            initProtocol();
+            listBox1.SelectedIndex = temp;
+            MessageBox.Show("保存协议成功");
         }
         /// <summary>
         /// 新增协议
@@ -81,6 +93,7 @@ namespace AnalyzeForm
             pro1.Name = "test01";
             protocolList.Add(pro1);
             pro1.saveFile();
+            MessageBox.Show("新增协议成功");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -88,6 +101,7 @@ namespace AnalyzeForm
             pro = (Protocol)listBox1.SelectedItem;
             protocolList.Remove(pro);
             pro.DeleteFile();
+            MessageBox.Show("删除协议成功");
         }
     }
 }

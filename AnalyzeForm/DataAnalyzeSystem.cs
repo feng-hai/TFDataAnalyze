@@ -29,6 +29,7 @@ namespace AnalyzeForm
         private void protocolManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProtocolManagement pmForm = new ProtocolManagement();
+            pmForm.StartPosition = FormStartPosition.CenterParent;
             this.Visible = false;
             pmForm.ShowDialog();
             this.Visible = true;
@@ -38,9 +39,10 @@ namespace AnalyzeForm
 
         private void dataAnalyzeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProtocolM pmFrom = new ProtocolM();
+            ProtocolM pmForm = new ProtocolM();
+            pmForm.StartPosition = FormStartPosition.CenterParent;
             this.Visible = false;
-            pmFrom.ShowDialog();
+            pmForm.ShowDialog();
             this.Visible = true;
 
         }

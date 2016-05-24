@@ -57,7 +57,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(764, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(794, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -105,7 +105,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(198, 43);
+            this.button1.Location = new System.Drawing.Point(216, 45);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -115,7 +115,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(680, 43);
+            this.button2.Location = new System.Drawing.Point(698, 45);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -126,7 +126,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(348, 44);
+            this.comboBox1.Location = new System.Drawing.Point(366, 46);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 20);
             this.comboBox1.TabIndex = 3;
@@ -134,21 +134,21 @@
             // 
             // treeView1
             // 
-            this.treeView1.Location = new System.Drawing.Point(10, 82);
+            this.treeView1.Location = new System.Drawing.Point(28, 84);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(261, 371);
             this.treeView1.TabIndex = 4;
             // 
             // treeView2
             // 
-            this.treeView2.Location = new System.Drawing.Point(485, 82);
+            this.treeView2.Location = new System.Drawing.Point(503, 84);
             this.treeView2.Name = "treeView2";
             this.treeView2.Size = new System.Drawing.Size(267, 371);
             this.treeView2.TabIndex = 5;
             // 
             // analyzeData
             // 
-            this.analyzeData.Location = new System.Drawing.Point(336, 240);
+            this.analyzeData.Location = new System.Drawing.Point(354, 242);
             this.analyzeData.Name = "analyzeData";
             this.analyzeData.Size = new System.Drawing.Size(75, 23);
             this.analyzeData.TabIndex = 6;
@@ -158,7 +158,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(336, 290);
+            this.button4.Location = new System.Drawing.Point(354, 292);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 7;
@@ -168,7 +168,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(284, 48);
+            this.label1.Location = new System.Drawing.Point(302, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 8;
@@ -177,7 +177,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 48);
+            this.label2.Location = new System.Drawing.Point(28, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 9;
@@ -185,7 +185,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(68, 44);
+            this.textBox1.Location = new System.Drawing.Point(86, 46);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(130, 21);
             this.textBox1.TabIndex = 10;
@@ -193,7 +193,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(484, 49);
+            this.label3.Location = new System.Drawing.Point(502, 51);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 11;
@@ -201,7 +201,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(540, 44);
+            this.textBox2.Location = new System.Drawing.Point(558, 46);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(140, 21);
             this.textBox2.TabIndex = 12;
@@ -210,7 +210,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(764, 467);
+            this.ClientSize = new System.Drawing.Size(794, 480);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -224,8 +224,10 @@
             this.Controls.Add(this.treeView2);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.menuStrip1);
+            this.HelpButton = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "DataAnalyzeSystem";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DataAnalyzeSystem";
             this.Load += new System.EventHandler(this.DataAnalyzeSystem_Load);
             this.menuStrip1.ResumeLayout(false);

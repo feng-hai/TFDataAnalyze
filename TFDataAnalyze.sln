@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyzeLibrary", "AnalyzeLibrary\AnalyzeLibrary.csproj", "{097754B1-D6D6-46EC-BA58-F8ED8B98A4C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyzeLibraryTests", "AnalyzeLibraryTests\AnalyzeLibraryTests.csproj", "{DDB1DBFC-F4AF-4670-B4DE-5B2C6A6005E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyzeForm", "AnalyzeForm\AnalyzeForm.csproj", "{4E7AC359-E343-4775-9CEC-9060B444A892}"
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ModelingProject1", "ModelingProject1\ModelingProject1.modelproj", "{F17EB498-6406-4F46-B18B-3CEA8B79B279}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{4E7AC359-E343-4775-9CEC-9060B444A892}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E7AC359-E343-4775-9CEC-9060B444A892}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E7AC359-E343-4775-9CEC-9060B444A892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F17EB498-6406-4F46-B18B-3CEA8B79B279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F17EB498-6406-4F46-B18B-3CEA8B79B279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F17EB498-6406-4F46-B18B-3CEA8B79B279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F17EB498-6406-4F46-B18B-3CEA8B79B279}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
