@@ -296,7 +296,7 @@ namespace AnalyzeLibrary.file
         /// <returns></returns>
         public static string GetDateDir()
         {
-            return DateTime.Now.ToString("yyyyMMdd");
+            return DateTime.Now.ToString("yyyyMMddHHmmss");
         }
         /// <summary>
         /// 根据时间得到文件名HHmmssff

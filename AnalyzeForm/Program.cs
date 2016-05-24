@@ -16,7 +16,7 @@ namespace AnalyzeForm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ProtocolM());
+            Application.Run(new DataAnalyzeSystem());
         }
     }
 }

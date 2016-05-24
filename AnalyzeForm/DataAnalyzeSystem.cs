@@ -28,11 +28,20 @@ namespace AnalyzeForm
 
         private void protocolManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ProtocolManagement pmForm = new ProtocolManagement();
+            this.Visible = false;
+            pmForm.ShowDialog();
+            this.Visible = true;
+
 
         }
 
         private void dataAnalyzeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ProtocolM pmFrom = new ProtocolM();
+            this.Visible = false;
+            pmFrom.ShowDialog();
+            this.Visible = true;
 
         }
         private void closseToolStripMenuItem_Click(object sender, EventArgs e)

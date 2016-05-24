@@ -161,6 +161,10 @@ namespace AnalyzeForm
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             var curItem = (Info)comboBox1.SelectedItem;
+            textBox1.Text = "";
+           
+            panel1.Controls.Clear();
+            frameId = 0;
             if (curItem.Id != "")
             {
 

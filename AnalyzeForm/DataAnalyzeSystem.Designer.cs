@@ -68,35 +68,35 @@
             this.dataAnalyzeToolStripMenuItem,
             this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(39, 21);
-            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.fileToolStripMenuItem.Text = "文件";
             // 
             // protocolManagementToolStripMenuItem
             // 
             this.protocolManagementToolStripMenuItem.Name = "protocolManagementToolStripMenuItem";
-            this.protocolManagementToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.protocolManagementToolStripMenuItem.Text = "ProtocolManagement";
+            this.protocolManagementToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.protocolManagementToolStripMenuItem.Text = "协议帧管理";
             this.protocolManagementToolStripMenuItem.Click += new System.EventHandler(this.protocolManagementToolStripMenuItem_Click);
             // 
             // dataAnalyzeToolStripMenuItem
             // 
             this.dataAnalyzeToolStripMenuItem.Name = "dataAnalyzeToolStripMenuItem";
-            this.dataAnalyzeToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.dataAnalyzeToolStripMenuItem.Text = "DataAnalyze";
+            this.dataAnalyzeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dataAnalyzeToolStripMenuItem.Text = "协议管理";
             this.dataAnalyzeToolStripMenuItem.Click += new System.EventHandler(this.dataAnalyzeToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.closeToolStripMenuItem.Text = "close";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeToolStripMenuItem.Text = "关闭";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closseToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(45, 21);
-            this.helpToolStripMenuItem.Text = "help";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.helpToolStripMenuItem.Text = "帮助";
             // 
             // folderBrowserDialog1
             // 
