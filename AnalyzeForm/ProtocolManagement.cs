@@ -96,7 +96,7 @@ namespace AnalyzeForm
 
                     createConttrol(panel1, item);
                 }
-            
+
             }
             _selIndex = listBox1.SelectedIndex;
             // Get the currently selected item in the ListBox.
@@ -141,6 +141,11 @@ namespace AnalyzeForm
             createText(gbox, "    长度:", item.Length.ToString(), "length", 165 * 2, 0);
             createText(gbox, "  分辨率:", item.Resolution.ToString(), "pixel", 0, 32);
             createText(gbox, "  偏移量:", item.Offset.ToString(), "offset", 165, 32);
+            if(item.Unit!=null)
+            {
+                createText(gbox, "  单位:", item.Unit.ToString(), "unit", 165 * 2, 32);
+            }
+          
         }
 
         private void createText(GroupBox gb, string name, string value, string id, int preW, int preH)
@@ -198,7 +203,7 @@ namespace AnalyzeForm
 
 
                 //    listBox1.ClearSelected();
-                  
+
 
                 //    listBox1.SelectedIndex = _selIndex;
                 //}
@@ -212,14 +217,17 @@ namespace AnalyzeForm
             curItem.FrameItemList.Clear();
             foreach (Control c in panel1.Controls)
             {
+
+                ProtocolFrameItem item = new ProtocolFrameItem();
                 foreach (Control cc in c.Controls)
                 {
                     if (cc is TextBox)
                     {
                         var tempName = cc.Name.Substring(cc.Name.LastIndexOf('_')
                             + 1);
-                        ProtocolFrameItem item = new ProtocolFrameItem();
+                       
                         string value = ((TextBox)cc).Text;
+
                         switch (tempName)
                         {
                             case "param":
@@ -232,26 +240,30 @@ namespace AnalyzeForm
                                 item.Length = int.Parse(value);
                                 break;
                             case "pixel":
-                                item.Resolution = int.Parse(value);
+                                item.Resolution = float.Parse(value);
                                 break;
                             case "offset":
                                 item.Offset = int.Parse(value);
                                 break;
+                            case "unit":
+                                item.Unit = value;
+                                break;
 
                         }
-                        if (item.Name != null)
-                        {
-                            curItem.FrameItemList.Add(item);
-                        }
+                        
 
                     }
+                }
+                if(item.Name!="")
+                { 
+                curItem.FrameItemList.Add(item);
                 }
             }
 
             pro1.saveFile();
             ; string temp = textBox1.Text;
             initListbox(false);
-            listBox1.SelectedValue=temp;
+            listBox1.SelectedValue = temp;
             MessageBox.Show("协议帧保存成功！");
 
 
@@ -259,11 +271,20 @@ namespace AnalyzeForm
         //新增帧
         private void button3_Click(object sender, EventArgs e)
         {
+            if (frameList != null)
+            {
+              
+
+
             ProtocolFrame frame = new ProtocolFrame();
-            frame.FrameId = "test";
-            frameList.Add(frame);
-            pro1.saveFile();
-            MessageBox.Show("新增协议帧成功 ！");
+                frame.FrameId = "test";
+                frameList.Add(frame);
+                pro1.saveFile();
+                MessageBox.Show("新增协议帧成功 ！");
+            }
+            else {
+                MessageBox.Show("请选择协议");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

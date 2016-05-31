@@ -11,8 +11,10 @@ namespace AnalyzeLibrary.protocol
         private string name;
         private int start;
         private int length;
-        private int resolution;
+        private float resolution;
         private int offset;
+        private float value;
+        private string unit=string.Empty;
         /// <summary>
         /// 协议帧项名称
         /// </summary>
@@ -61,7 +63,7 @@ namespace AnalyzeLibrary.protocol
         /// <summary>
         /// 协议帧项分辨率
         /// </summary>
-        public int Resolution
+        public float Resolution
         {
             get
             {
@@ -86,6 +88,32 @@ namespace AnalyzeLibrary.protocol
             set
             {
                 offset = value;
+            }
+        }
+
+        public float Value
+        {
+            get
+            {
+                return value;
+            }
+
+            set
+            {
+                this.value = value;
+            }
+        }
+
+        public string Unit
+        {
+            get
+            {
+                return unit;
+            }
+
+            set
+            {
+                unit = value;
             }
         }
     }

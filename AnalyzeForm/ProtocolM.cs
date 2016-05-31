@@ -24,7 +24,8 @@ namespace AnalyzeForm
         {
             initProtocol();
         }
-        private void initProtocol() {
+        private void initProtocol()
+        {
 
 
             string[] protocols = AnalyzeLibrary.file.DirFileHelper.GetFileNames(System.IO.Directory.GetCurrentDirectory() + @"\resource", "*.xml", true);
@@ -46,19 +47,23 @@ namespace AnalyzeForm
 
 
         int _selIndex = -1;
-        Protocol pro;
+        Protocol pro=new Protocol ();
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex == _selIndex)
                 return;
 
             pro = (Protocol)listBox1.SelectedItem;
+            if(pro!=null)
+            {
 
+           
             textBox1.Text = pro.Name;
             textBox2.Text = pro.Description;
 
 
             _selIndex = listBox1.SelectedIndex;
+            }
         }
         /// <summary>
         /// 修改协议
@@ -79,7 +84,7 @@ namespace AnalyzeForm
 
             string temp = textBox1.Text;
             initProtocol();
-            listBox1.SelectedValue =temp ;
+            listBox1.SelectedValue = temp;
             MessageBox.Show("保存协议成功");
         }
         /// <summary>
@@ -99,9 +104,14 @@ namespace AnalyzeForm
         private void button2_Click(object sender, EventArgs e)
         {
             pro = (Protocol)listBox1.SelectedItem;
-            protocolList.Remove(pro);
-            pro.DeleteFile();
-            MessageBox.Show("删除协议成功");
+            if (pro != null)
+            {
+
+                pro.DeleteFile();
+                protocolList.Remove(pro);
+              
+                MessageBox.Show("删除协议成功");
+            }
         }
     }
 }

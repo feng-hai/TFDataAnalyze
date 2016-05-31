@@ -617,6 +617,21 @@ namespace AnalyzeLibrary.file
         }
         #endregion
 
+
+        //public static byte[] GetFileArray(string filePath)
+        //{
+        //    FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+        //   // StreamReader sr = new StreamReader(fs, Encoding.Default);
+        //    BinaryReader br = new BinaryReader(fs);
+          
+
+        //    fs.Close();
+        //    br.Close();
+
+        //    //获取文件的大小
+        //    return strList;
+        //}
+
         #region 获取指定目录中的子目录列表
         /// <summary>
         /// 获取指定目录及子目录中所有子目录列表
@@ -790,4 +805,5 @@ namespace AnalyzeLibrary.file
         #endregion
     }
 }
+
 

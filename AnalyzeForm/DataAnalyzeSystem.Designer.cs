@@ -41,12 +41,13 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.analyzeData = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,21 +75,21 @@
             // protocolManagementToolStripMenuItem
             // 
             this.protocolManagementToolStripMenuItem.Name = "protocolManagementToolStripMenuItem";
-            this.protocolManagementToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.protocolManagementToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.protocolManagementToolStripMenuItem.Text = "协议帧管理";
             this.protocolManagementToolStripMenuItem.Click += new System.EventHandler(this.protocolManagementToolStripMenuItem_Click);
             // 
             // dataAnalyzeToolStripMenuItem
             // 
             this.dataAnalyzeToolStripMenuItem.Name = "dataAnalyzeToolStripMenuItem";
-            this.dataAnalyzeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dataAnalyzeToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.dataAnalyzeToolStripMenuItem.Text = "协议管理";
             this.dataAnalyzeToolStripMenuItem.Click += new System.EventHandler(this.dataAnalyzeToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.closeToolStripMenuItem.Text = "关闭";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closseToolStripMenuItem_Click);
             // 
@@ -156,15 +157,6 @@
             this.analyzeData.UseVisualStyleBackColor = true;
             this.analyzeData.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(354, 292);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -206,11 +198,30 @@
             this.textBox2.Size = new System.Drawing.Size(140, 21);
             this.textBox2.TabIndex = 12;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(358, 290);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 12);
+            this.label4.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(333, 161);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(143, 48);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "1、选择原始文件\r\n2、选择数据协议\r\n3、选择结果文件存放地址\r\n4、点击解析数据";
+            // 
             // DataAnalyzeSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 480);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -219,7 +230,6 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.analyzeData);
             this.Controls.Add(this.treeView2);
             this.Controls.Add(this.treeView1);
@@ -252,11 +262,12 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.Button analyzeData;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

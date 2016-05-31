@@ -1,4 +1,6 @@
 ﻿using AnalyzeLibrary.file;
+using AnalyzeLibrary.protocol;
+using AnalyzeLibrary.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -98,19 +100,81 @@ namespace AnalyzeForm
             if (folder.ShowDialog() == DialogResult.OK)
             {
                 string sss = folder.SelectedPath;
+                if (string.IsNullOrEmpty(sss))
+                {
+                    MessageBox.Show("请选择解析后文件存放位置");
+                    return;
+                }
                 textBox2.Text = sss;
-                string[] temp = loadFile(sss);
-                TreeNode root = new TreeNode();
-                root.Text = DirFileHelper.GetFileName(sss);
-                root.Tag = sss;
-                treeView2.Nodes.Add(root);
-                InitTree(sss, root);
-                MessageBox.Show("已选择文件夹:" + sss, "选择文件夹提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LoadResultFile();
+                //string[] temp = loadFile(sss);
+                //TreeNode root = new TreeNode();
+                //root.Text = DirFileHelper.GetFileName(sss);
+                //root.Tag = sss;
+                //treeView2.Nodes.Clear();
+                //treeView2.Nodes.Add(root);
+                //InitTree(sss, root);
+                //MessageBox.Show("已选择文件夹:" + sss, "选择文件夹提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void LoadResultFile() {
+            string sss = textBox2.Text;
+            string[] temp = loadFile(sss);
+            TreeNode root = new TreeNode();
+            root.Text = DirFileHelper.GetFileName(sss);
+            root.Tag = sss;
+            treeView2.Nodes.Clear();
+            treeView2.Nodes.Add(root);
+            InitTree(sss, root);
+          //  MessageBox.Show("已选择文件夹:" + sss, "选择文件夹提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("请选择原始数据");
+                return;
+            }
+            if (textBox2.Text == "")
+            {
+                MessageBox.Show("请选择解析文本保存路径");
+                return;
+            }
+            analyzeData.Enabled = false;
+            label4.Text = "解析中...";
+          
+            string[] test = DirFileHelper.GetFileNames(textBox1.Text, "*.TXT", true);
+            string[] protocols = AnalyzeLibrary.file.DirFileHelper.GetFileNames(System.IO.Directory.GetCurrentDirectory() + @"\resource", "test.xml", true);
+
+            foreach(string strP in protocols)
+            {
+                string str = DirFileHelper.GetFileStr(strP);
+                foreach(string dataP in test)
+                {
+                    DataFrames data = new DataFrames(dataP, str);
+                    data.GetData();
+                    data.DataToArray();
+
+                   DateTime dt= Convert.ToDateTime(data.formateDate());
+                    if(data.ValueList.Count>0)
+                    {
+                        List<string[]> tempList = data.ValueList;
+                        CSVUtil.dt2csvForList(tempList, textBox2.Text +"/"+dt.ToString("yyyyMMddHHmmss")+ @".csv", "test", string.Join(", ", data.Header.ToArray()));
+                        LoadResultFile();
+                    }
+                   
+                }
+              
+
+            }
+
+            analyzeData.Enabled = true;
+            label4.Text = "解析完成";
+
 
         }
 

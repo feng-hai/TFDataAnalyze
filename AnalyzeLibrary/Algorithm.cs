@@ -133,7 +133,7 @@ namespace AnalyzeLibrary
                 int length = item.Length;
                 string tempValue = value.Substring(start, length);
                 int intValue = Convert.ToInt32(tempValue, 2);
-                para.Value = intValue * item.Resolution + item.Offset;
+                //para.Value = intValue * item.Resolution + item.Offset;
                 rip.Add(para);
             }
             return rip;
