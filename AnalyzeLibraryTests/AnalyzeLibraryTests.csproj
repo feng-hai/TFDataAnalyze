@@ -63,6 +63,9 @@
       <Name>AnalyzeLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="protocol\TF卡项目.eap" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

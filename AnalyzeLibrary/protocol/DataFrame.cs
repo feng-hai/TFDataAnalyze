@@ -123,7 +123,6 @@ namespace AnalyzeLibrary.protocol
      
         public void formate()
         {
-
             DateTime dt= Convert.ToDateTime(this.StartDate); 
             string no = this.orgStr.Substring(0, 8);
             this.FrameNo = Int32.Parse(no, System.Globalization.NumberStyles.HexNumber); ;
