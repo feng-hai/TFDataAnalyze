@@ -11,10 +11,10 @@ namespace AnalyzeLibrary.protocol
     public class DataFrame
     {
 
-        public DataFrame(string data,string startDate)
+        public DataFrame(string data,DateTime startDate)
         {
             this.orgStr = data;
-            this.startDate=startDate;
+            this.currentTime=startDate;
             this.formate();
         }
         private string orgStr;
@@ -24,6 +24,9 @@ namespace AnalyzeLibrary.protocol
         private string frameContent;
         private string code;
         private string name;
+
+        private DateTime currentTime;
+       
 
       
 
@@ -120,16 +123,29 @@ namespace AnalyzeLibrary.protocol
             }
         }
 
-     
+        public DateTime CurrentTime
+        {
+            get
+            {
+                return currentTime;
+            }
+
+            set
+            {
+                currentTime = value;
+            }
+        }
+
         public void formate()
         {
-            DateTime dt= Convert.ToDateTime(this.StartDate); 
+            DateTime dt = currentTime;
             string no = this.orgStr.Substring(0, 8);
             this.FrameNo = Int32.Parse(no, System.Globalization.NumberStyles.HexNumber); ;
             string msStr = this.orgStr.Substring(8, 4);
             int ms = Int16.Parse(msStr, System.Globalization.NumberStyles.HexNumber);
-            dt.AddMilliseconds(ms);
-            this.StartDate = dt.ToString("yyyy-MM-dd HH:mm:ss");
+           dt= dt.AddMilliseconds(ms);
+            this.CurrentTime = dt;
+            this.StartDate = dt.ToString("HH:mm:ss");
             string frameId = this.orgStr.Substring(12, 8).ToUpper();
             byte[] temp = ByteUtil.strToToHexByte(frameId);
             Array.Reverse(temp);

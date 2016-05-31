@@ -172,11 +172,12 @@ namespace AnalyzeLibrary.protocol
                 byte[] start = br.ReadBytes((int)br.BaseStream.Length);
                 string temp = ByteUtil.byteToHexStr(start);
                 string[] tampArray = Regex.Split(temp, "7E7E", RegexOptions.IgnoreCase);
-
+               var fileDate= Convert.ToDateTime(formateDate());
                 foreach (string str in tampArray)
                 {
                     string tempStr = str.Replace("7E", "");
-                    DataFrame df = new DataFrame(tempStr, formateDate());
+                    DataFrame df = new DataFrame(tempStr, fileDate);
+                    fileDate=  df.CurrentTime;
                     analyzeFrame(df);
                     listFrame.Add(df);
                 }
