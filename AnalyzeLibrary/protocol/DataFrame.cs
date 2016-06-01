@@ -11,10 +11,10 @@ namespace AnalyzeLibrary.protocol
     public class DataFrame
     {
 
-        public DataFrame(string data,DateTime startDate)
+        public DataFrame(string data, DateTime startDate)
         {
             this.orgStr = data;
-            this.currentTime=startDate;
+            this.currentTime = startDate;
             this.formate();
         }
         private string orgStr;
@@ -26,9 +26,9 @@ namespace AnalyzeLibrary.protocol
         private string name;
 
         private DateTime currentTime;
-       
 
-      
+
+
 
         private List<ProtocolFrameItem> itemList = new List<ProtocolFrameItem>();
 
@@ -140,10 +140,13 @@ namespace AnalyzeLibrary.protocol
         {
             DateTime dt = currentTime;
             string no = this.orgStr.Substring(0, 8);
-            this.FrameNo = Int32.Parse(no, System.Globalization.NumberStyles.HexNumber); ;
+            byte[] tempNO = ByteUtil.strToToHexByte(no);
+            Array.Reverse(tempNO);
+            string noResult = ByteUtil.byteToHexStr(tempNO);
+            this.FrameNo = Int32.Parse(noResult, System.Globalization.NumberStyles.HexNumber);
             string msStr = this.orgStr.Substring(8, 4);
             int ms = Int16.Parse(msStr, System.Globalization.NumberStyles.HexNumber);
-           dt= dt.AddMilliseconds(ms);
+            dt = dt.AddMilliseconds(ms);
             this.CurrentTime = dt;
             this.StartDate = dt.ToString("HH:mm:ss");
             string frameId = this.orgStr.Substring(12, 8).ToUpper();
@@ -151,6 +154,11 @@ namespace AnalyzeLibrary.protocol
             Array.Reverse(temp);
             string rTemp = ByteUtil.byteToHexStr(temp);
             this.FrameId = rTemp;
+            string content = this.orgStr.Substring(20, 16);
+            content.Replace("7D02", "7E");
+            content.Replace("7D01", "7D");
+            var checkCode = this.orgStr.Substring(0, 36);
+            string resutlStr = CRC16.CRC16String(checkCode);
             this.FrameContent = this.orgStr.Substring(20, 16);
             this.code = this.orgStr.Substring(36, 2);
         }

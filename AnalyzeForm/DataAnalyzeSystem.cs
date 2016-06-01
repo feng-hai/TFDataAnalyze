@@ -56,7 +56,13 @@ namespace AnalyzeForm
 
         private void DataAnalyzeSystem_Load(object sender, EventArgs e)
         {
-           string [] protocols= DirFileHelper.GetFileNames(System.IO.Directory.GetCurrentDirectory()+@"\resource", "*.xml", true);
+            LoadProtocol();
+
+        }
+
+        private void LoadProtocol()
+        {
+            string[] protocols = DirFileHelper.GetFileNames(System.IO.Directory.GetCurrentDirectory() + @"\resource", "*.xml", true);
 
             IList<Info> infoList = new List<Info>();
             foreach (string str in protocols)
@@ -68,7 +74,6 @@ namespace AnalyzeForm
             comboBox1.DataSource = infoList;
             comboBox1.ValueMember = "Id";
             comboBox1.DisplayMember = "Name";
-
         }
 
         private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
@@ -87,9 +92,10 @@ namespace AnalyzeForm
                 TreeNode root = new TreeNode();
                 root.Text = DirFileHelper.GetFileName(sss);
                 root.Tag = sss;
+                treeView1.Nodes.Clear();
                 treeView1.Nodes.Add(root);
                 InitTree(sss, root);
-               // MessageBox.Show(temp.ToString(), "选择文件夹提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // MessageBox.Show(temp.ToString(), "选择文件夹提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //MessageBox.Show("已选择文件夹:" + sss, "选择文件夹提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -119,7 +125,8 @@ namespace AnalyzeForm
             }
         }
 
-        private void LoadResultFile() {
+        private void LoadResultFile()
+        {
             string sss = textBox2.Text;
             string[] temp = loadFile(sss);
             TreeNode root = new TreeNode();
@@ -128,7 +135,7 @@ namespace AnalyzeForm
             treeView2.Nodes.Clear();
             treeView2.Nodes.Add(root);
             InitTree(sss, root);
-          //  MessageBox.Show("已选择文件夹:" + sss, "选择文件夹提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //  MessageBox.Show("已选择文件夹:" + sss, "选择文件夹提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -144,31 +151,46 @@ namespace AnalyzeForm
                 MessageBox.Show("请选择解析文本保存路径");
                 return;
             }
+
+            string protocolUrl = null;
+            if (comboBox1.SelectedItem != null)
+            {
+                var curItem = (Info)comboBox1.SelectedItem;
+                protocolUrl = curItem.Id;
+            }
+            if (protocolUrl == null)
+            {
+                MessageBox.Show("请选择协议");
+                return;
+            }
+
+
             analyzeData.Enabled = false;
             label4.Text = "解析中...";
-          
-            string[] test = DirFileHelper.GetFileNames(textBox1.Text, "*.TXT", true);
-            string[] protocols = AnalyzeLibrary.file.DirFileHelper.GetFileNames(System.IO.Directory.GetCurrentDirectory() + @"\resource", "test.xml", true);
 
-            foreach(string strP in protocols)
+
+            string[] test = DirFileHelper.GetFileNames(textBox1.Text, "*.TXT", true);
+            // string[] protocols = AnalyzeLibrary.file.DirFileHelper.GetFileNames(protocolUrl, true);
+
+            //  foreach(string strP in protocols)
             {
-                string str = DirFileHelper.GetFileStr(strP);
-                foreach(string dataP in test)
+                string str = DirFileHelper.GetFileStr(protocolUrl);
+                foreach (string dataP in test)
                 {
                     DataFrames data = new DataFrames(dataP, str);
                     data.GetData();
                     data.DataToArray();
 
-                   DateTime dt= Convert.ToDateTime(data.formateDate());
-                    if(data.ValueList.Count>0)
+                    DateTime dt = Convert.ToDateTime(data.formateDate());
+                    if (data.ValueList.Count > 0)
                     {
                         List<string[]> tempList = data.ValueList;
-                        CSVUtil.dt2csvForList(tempList, textBox2.Text +"/"+dt.ToString("yyyyMMddHHmmss")+ @".csv", "test", string.Join(", ", data.Header.ToArray()));
+                        CSVUtil.dt2csvForList(tempList, textBox2.Text + "/" + dt.ToString("yyyyMMddHHmmss") + @".csv", "", string.Join(", ", data.Header.ToArray()));
                         LoadResultFile();
                     }
-                   
+
                 }
-              
+
 
             }
 
@@ -178,13 +200,13 @@ namespace AnalyzeForm
 
         }
 
-        private void InitTree(string file ,TreeNode node)
+        private void InitTree(string file, TreeNode node)
         {
 
             var temp = loadDirectories(file);
             foreach (string fileName in temp)
             {
-               var tempNode= AddNode(node, fileName);
+                var tempNode = AddNode(node, fileName);
                 InitTree(fileName, tempNode);
             }
             if (!DirFileHelper.IsEmptyDirectory(file))
@@ -197,16 +219,16 @@ namespace AnalyzeForm
 
             }
         }
-        private TreeNode AddNode(TreeNode root  , string fileName)
+        private TreeNode AddNode(TreeNode root, string fileName)
         {
-            
-                TreeNode node = new TreeNode();
-                node.Text = DirFileHelper.GetFileName(fileName);
-                node.Tag = fileName;
-                root.Nodes.Add(node);
-                return node;
-             
-            
+
+            TreeNode node = new TreeNode();
+            node.Text = DirFileHelper.GetFileName(fileName);
+            node.Tag = fileName;
+            root.Nodes.Add(node);
+            return node;
+
+
         }
 
         private string[] loadFile(string url)
@@ -222,6 +244,11 @@ namespace AnalyzeForm
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            LoadProtocol();
         }
     }
 }

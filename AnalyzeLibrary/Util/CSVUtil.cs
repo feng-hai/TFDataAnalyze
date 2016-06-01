@@ -96,7 +96,14 @@ namespace AnalyzeLibrary.Util
                     {
                         if (j > 0)
                             strBufferLine += ",";
-                        strBufferLine += list[i][j].ToString();
+                        if (string.IsNullOrEmpty(list[i][j]))
+                        {
+                            strBufferLine += string.Empty;
+                        }
+                        else {
+                            strBufferLine += list[i][j].ToString();
+                        }
+                        
                     }
                     strmWriterObj.WriteLine(strBufferLine);
                 }
