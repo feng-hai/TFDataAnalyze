@@ -27,6 +27,8 @@ namespace AnalyzeLibrary.protocol
 
         private DateTime currentTime;
 
+        private bool isYes = false;
+
 
 
 
@@ -136,31 +138,57 @@ namespace AnalyzeLibrary.protocol
             }
         }
 
+        public bool IsYes
+        {
+            get
+            {
+                return isYes;
+            }
+
+            set
+            {
+                isYes = value;
+            }
+        }
+
         public void formate()
         {
             DateTime dt = currentTime;
-            string no = this.orgStr.Substring(0, 8);
-            byte[] tempNO = ByteUtil.strToToHexByte(no);
-            Array.Reverse(tempNO);
-            string noResult = ByteUtil.byteToHexStr(tempNO);
-            this.FrameNo = Int32.Parse(noResult, System.Globalization.NumberStyles.HexNumber);
-            string msStr = this.orgStr.Substring(8, 4);
-            int ms = Int16.Parse(msStr, System.Globalization.NumberStyles.HexNumber);
-            dt = dt.AddMilliseconds(ms);
-            this.CurrentTime = dt;
-            this.StartDate = dt.ToString("HH:mm:ss");
-            string frameId = this.orgStr.Substring(12, 8).ToUpper();
-            byte[] temp = ByteUtil.strToToHexByte(frameId);
-            Array.Reverse(temp);
-            string rTemp = ByteUtil.byteToHexStr(temp);
-            this.FrameId = rTemp;
-            string content = this.orgStr.Substring(20, 16);
-            content.Replace("7D02", "7E");
-            content.Replace("7D01", "7D");
-            var checkCode = this.orgStr.Substring(0, 36);
-            string resutlStr = CRC16.CRC16String(checkCode);
-            this.FrameContent = this.orgStr.Substring(20, 16);
-            this.code = this.orgStr.Substring(36, 2);
+            if (this.orgStr.Length == 38)
+            {
+
+
+                string no = this.orgStr.Substring(0, 8);
+                byte[] tempNO = ByteUtil.strToToHexByte(no);
+                Array.Reverse(tempNO);
+                string noResult = ByteUtil.byteToHexStr(tempNO);
+                this.FrameNo = Int32.Parse(noResult, System.Globalization.NumberStyles.HexNumber);
+                string msStr = this.orgStr.Substring(8, 4);
+                int ms = Int16.Parse(msStr, System.Globalization.NumberStyles.HexNumber);
+                dt = dt.AddMilliseconds(ms);
+                this.CurrentTime = dt;
+                this.StartDate = dt.ToString("HH:mm:ss");
+                string frameId = this.orgStr.Substring(12, 8).ToUpper();
+                byte[] temp = ByteUtil.strToToHexByte(frameId);
+                Array.Reverse(temp);
+                string rTemp = ByteUtil.byteToHexStr(temp);
+                this.FrameId = rTemp;
+                string content = this.orgStr.Substring(20, 16);
+                content.Replace("7D02", "7E");
+                content.Replace("7D01", "7D");
+                var checkCode = this.orgStr.Substring(0, 36);
+                string resutlStr = CRC16.CRC16String(checkCode);
+                this.FrameContent = this.orgStr.Substring(20, 16);
+                byte[] tempContent = ByteUtil.strToToHexByte(this.FrameContent);
+                Array.Reverse(tempContent);
+                this.frameContent = ByteUtil.byteToHexStr(tempContent);
+
+                this.code = this.orgStr.Substring(36, 2);
+                if (resutlStr.ToUpper() == this.code)
+                {
+                    this.IsYes = true;
+                }
+            }
         }
 
 

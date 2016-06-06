@@ -179,7 +179,11 @@ namespace AnalyzeLibrary.protocol
                     DataFrame df = new DataFrame(tempStr, fileDate);
                     fileDate=  df.CurrentTime;
                     analyzeFrame(df);
-                    listFrame.Add(df);
+                    if(df.IsYes)
+                    {
+                        listFrame.Add(df);
+                    }
+                  
                 }
 
 

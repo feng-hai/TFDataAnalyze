@@ -14,12 +14,50 @@ namespace AnalyzeLibrary.Util
         {
             string str = string.Empty;
             byte[] bys = ByteUtil.strToToHexByte(data);
-           UInt16 int16= crc16(bys, bys.Length);
-            byte[] reBy = new byte[2];
-            ConvertIntToByteArray(int16, ref reBy);
+            // UInt16 int16= crc16(bys, bys.Length);
+            //  byte[] reBy = new byte[2];
 
-            str = ByteUtil.byteToHexStr(reBy);
+          
+           // ConvertIntToByteArray(int16, ref reBy);
+
+           // str = Convert.ToString((crc16_(bys, bys.Length)),16);
+            str = Convert.ToString((checkBytes(bys)), 16);
             return str;
+        }
+
+
+        public static byte checkBytes(byte[] data)
+        {
+            byte temp = data[0];
+            for (int i = 1; i < data.Length; i++)
+            {
+                temp =(byte) (temp ^ data[i]);
+            }
+
+            return temp;
+
+        }
+        public static byte crc16_(byte[] data, int len)
+        {
+           
+            int xda, xdapoly;
+            int i, j, xdabit;
+            xda = 0xFFFF;
+            xdapoly = 0x1021;
+            for (i = 0; i < len; i++)
+            {
+                xda ^= data[i];
+                for (j = 0; j < 8; j++)
+                {
+                    xdabit = (int)(xda & 0x01);
+                    xda >>= 1;
+                    if (xdabit == 1)
+                        xda ^= xdapoly;
+                }
+            }
+           byte temdata = (byte)(xda & 0xFF);
+            //temdata[1] = (byte)(xda >> 8);
+            return temdata;
         }
         public static UInt16 crc16(byte[] data, int len)
         {
