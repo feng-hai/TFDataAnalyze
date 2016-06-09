@@ -24,6 +24,7 @@ namespace AnalyzeLibrary.protocol
         private string frameContent;
         private string code;
         private string name;
+        private uint rowNo;
 
         private DateTime currentTime;
 
@@ -151,6 +152,19 @@ namespace AnalyzeLibrary.protocol
             }
         }
 
+        public uint RowNo
+        {
+            get
+            {
+                return rowNo;
+            }
+
+            set
+            {
+                rowNo = value;
+            }
+        }
+
         public void formate()
         {
             DateTime dt = currentTime;
@@ -164,7 +178,10 @@ namespace AnalyzeLibrary.protocol
                 string noResult = ByteUtil.byteToHexStr(tempNO);
                 this.FrameNo = Int32.Parse(noResult, System.Globalization.NumberStyles.HexNumber);
                 string msStr = this.orgStr.Substring(8, 4);
-                int ms = Int16.Parse(msStr, System.Globalization.NumberStyles.HexNumber);
+                byte[] tempMs = ByteUtil.strToToHexByte(msStr);
+                Array.Reverse(tempMs);
+                string rTempMs = ByteUtil.byteToHexStr(tempMs);
+                int ms = Int16.Parse(rTempMs, System.Globalization.NumberStyles.HexNumber);
                 dt = dt.AddMilliseconds(ms);
                 this.CurrentTime = dt;
                 this.StartDate = dt.ToString("HH:mm:ss");
@@ -182,7 +199,6 @@ namespace AnalyzeLibrary.protocol
                 byte[] tempContent = ByteUtil.strToToHexByte(this.FrameContent);
                 Array.Reverse(tempContent);
                 this.frameContent = ByteUtil.byteToHexStr(tempContent);
-
                 this.code = this.orgStr.Substring(36, 2);
                 if (resutlStr.ToUpper() == this.code)
                 {

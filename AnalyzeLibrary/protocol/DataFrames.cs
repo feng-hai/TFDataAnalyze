@@ -13,16 +13,20 @@ namespace AnalyzeLibrary.protocol
 {
     public class DataFrames
     {
-        public DataFrames(string dataPath, string protocolPath)
+        public DataFrames(string dataPath, string protocolPath,int timeSpan)
         {
             this.dataPath = dataPath;
             this.protocolPath = protocolPath;
+            this.timeSpan = timeSpan;
             FrameHeader();
         }
         List<string> header = new List<string>();
         List<string[]> valueList = new List<string[]>();
         private string dataPath;
         private string protocolPath;
+        private DateTime currentDate;
+        private uint rowNo = 0;
+        private int timeSpan;
 
        
 
@@ -99,9 +103,15 @@ namespace AnalyzeLibrary.protocol
             Protocol pro1 = (Protocol)XmlUtil.Deserialize(typeof(Protocol), this.protocolPath);
             pro1.Url = this.protocolPath;
             //  System.ComponentModel.BindingList<ProtocolFrame> frameList = new System.ComponentModel.BindingList<ProtocolFrame>(pro1.FrameList);
+            TimeSpan span = df.CurrentTime - currentDate;
 
-       
+            if (span.Milliseconds > this.timeSpan)
+            {
+                rowNo++;
+                currentDate = df.CurrentTime;
+            }
 
+            df.RowNo = rowNo;
             ProtocolFrame frame = this.FindFrame(pro1.FrameList, df.FrameId);
             if (frame != null)
             {
@@ -112,6 +122,7 @@ namespace AnalyzeLibrary.protocol
                     item.Value = Int32.Parse(temp, System.Globalization.NumberStyles.HexNumber) * item.Resolution + item.Offset;
                     df.ItemList.Add(item);
                 }
+                
 
             }
 
@@ -172,7 +183,8 @@ namespace AnalyzeLibrary.protocol
                 byte[] start = br.ReadBytes((int)br.BaseStream.Length);
                 string temp = ByteUtil.byteToHexStr(start);
                 string[] tampArray = Regex.Split(temp, "7E7E", RegexOptions.IgnoreCase);
-               var fileDate= Convert.ToDateTime(formateDate());
+                var fileDate= Convert.ToDateTime(formateDate());
+                currentDate = fileDate;
                 foreach (string str in tampArray)
                 {
                     string tempStr = str.Replace("7E", "");
@@ -215,22 +227,22 @@ namespace AnalyzeLibrary.protocol
         /// </summary>
         public void DataToArray()
         {
-            Dictionary<int, string[]> test = new Dictionary<int, string[]>();
+            Dictionary<uint, string[]> test = new Dictionary<uint, string[]>();
             foreach (DataFrame frame in this.ListFrame)
             {
                 string[] tempFrame=null;
-                if (!test.ContainsKey(frame.FrameNo))
+                if (!test.ContainsKey(frame.RowNo))
                 {
                     if(frame.ItemList.Count>0)
                     {
                         tempFrame = new string[this.Header.Count];
                         tempFrame[0] = frame.StartDate;
-                        test.Add(frame.FrameNo, tempFrame);
+                        test.Add(frame.RowNo, tempFrame);
 
                     }
                 }
                 else {
-                    tempFrame = test[frame.FrameNo];
+                    tempFrame = test[frame.RowNo];
                 }
               
                 foreach (ProtocolFrameItem item in frame.ItemList)

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyzeLibraryTests", "Anal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyzeForm", "AnalyzeForm\AnalyzeForm.csproj", "{4E7AC359-E343-4775-9CEC-9060B444A892}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AnalyzeData", "AnalyzeData\AnalyzeData.vdproj", "{388E8FCC-5D54-477C-A6DA-819A57ECE23D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,8 @@ Global
 		{4E7AC359-E343-4775-9CEC-9060B444A892}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E7AC359-E343-4775-9CEC-9060B444A892}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E7AC359-E343-4775-9CEC-9060B444A892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{388E8FCC-5D54-477C-A6DA-819A57ECE23D}.Debug|Any CPU.ActiveCfg = Debug
+		{388E8FCC-5D54-477C-A6DA-819A57ECE23D}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

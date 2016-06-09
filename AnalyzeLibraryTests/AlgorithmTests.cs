@@ -22,7 +22,7 @@ namespace AnalyzeLibrary.Tests
             string[] test = DirFileHelper.GetFileNames(@"G:\CAN", "*.TXT", true);
             string[] protocols = AnalyzeLibrary.file.DirFileHelper.GetFileNames(System.IO.Directory.GetCurrentDirectory() + @"\resource", "test.xml", true);
             string str = DirFileHelper.GetFileStr(protocols[0]);
-            DataFrames data = new DataFrames(test[0], str);
+            DataFrames data = new DataFrames(test[0], str,20);
             data.GetData();
             data.DataToArray();
             List<string[]> tempList = data.ValueList;

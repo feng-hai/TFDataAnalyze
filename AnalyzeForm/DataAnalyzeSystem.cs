@@ -4,6 +4,7 @@ using AnalyzeLibrary.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -166,23 +167,31 @@ namespace AnalyzeForm
 
 
             analyzeData.Enabled = false;
-            label4.Text = "解析中...";
+            analyzeData.Text = "解析中...";
 
 
-            string[] test = DirFileHelper.GetFileNames(textBox1.Text, "*.TXT", true);
+            string extension = ConfigurationManager.AppSettings["fileExtension"];
+            string[] test = DirFileHelper.GetFileNames(textBox1.Text,  "*."+ extension, true);
             // string[] protocols = AnalyzeLibrary.file.DirFileHelper.GetFileNames(protocolUrl, true);
 
             //  foreach(string strP in protocols)
             {
                 string str = DirFileHelper.GetFileStr(protocolUrl);
+
+                string timeSpanInt = timeSpan.Text;
+                int spanTime = 0;
+                if (!int.TryParse(timeSpanInt, out spanTime))
+                {
+                    spanTime = 20;
+                }
                 foreach (string dataP in test)
                 {
-                    DataFrames data = new DataFrames(dataP, str);
+                    DataFrames data = new DataFrames(dataP, str, spanTime);
                     data.GetData();
                     data.DataToArray();
 
                     DateTime dt = Convert.ToDateTime(data.formateDate());
-                    if (data.ValueList.Count > 0)
+                    if (data.ValueList.Count > 0) ;
                     {
                         List<string[]> tempList = data.ValueList;
                         CSVUtil.dt2csvForList(tempList, textBox2.Text + "/" + dt.ToString("yyyyMMddHHmmss") + @".csv", "", string.Join(", ", data.Header.ToArray()));
@@ -195,8 +204,9 @@ namespace AnalyzeForm
             }
 
             analyzeData.Enabled = true;
-            label4.Text = "解析完成";
+            analyzeData.Text = "数据解析";
 
+            MessageBox.Show("数据解析完成");
 
         }
 
