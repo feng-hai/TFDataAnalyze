@@ -68,6 +68,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
         "Release"
@@ -92,6 +100,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
     }
@@ -114,7 +130,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.5"
+                "FrameworkVersion" = "8:.NETFramework,Version=v3.5"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=395269"
                 }
@@ -230,7 +246,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AnalyzeData"
         "ProductCode" = "8:{27315FD5-D68E-47B8-A54A-82E1801E16A1}"
-        "PackageCode" = "8:{B7A5C55B-5F11-40AD-A898-361E626B97FA}"
+        "PackageCode" = "8:{05E75BC3-949B-447D-999A-E448118785E5}"
         "UpgradeCode" = "8:{7435303F-3771-43E8-8DFC-A6B1C18CD9D0}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
