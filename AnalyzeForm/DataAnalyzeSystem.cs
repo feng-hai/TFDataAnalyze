@@ -191,10 +191,11 @@ namespace AnalyzeForm
                     data.DataToArray();
 
                     DateTime dt = Convert.ToDateTime(data.formateDate());
-                    if (data.ValueList.Count > 0) ;
+                    if (data.ValueList.Count > 0) 
                     {
                         List<string[]> tempList = data.ValueList;
-                        CSVUtil.dt2csvForList(tempList, textBox2.Text + "/" + dt.ToString("yyyyMMddHHmmss") + @".csv", "", string.Join(", ", data.Header.ToArray()));
+                        CSVUtil.dt2csvForList(tempList, textBox2.Text + "/" + dt.ToString("yyyyMMddHHmmss") + @".CSV", "", string.Join(", ", data.Header.ToArray()));
+                        CSVUtil.GenerateWorkSheetWithSB(tempList, textBox2.Text + "/" + dt.ToString("yyyyMMddHHmmss") + @".xls", "", string.Join(", ", data.Header.ToArray()));
                         LoadResultFile();
                     }
 

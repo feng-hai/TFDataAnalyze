@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_05DFD542200E1041C03AB101B328A534"
-        "OwnerKey" = "8:_19D493521FA945F8A9896D17238F3403"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_19D493521FA945F8A9896D17238F3403"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -35,12 +29,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_19D493521FA945F8A9896D17238F3403"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_05DFD542200E1041C03AB101B328A534"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -138,37 +126,6 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_05DFD542200E1041C03AB101B328A534"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AnalyzeLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_05DFD542200E1041C03AB101B328A534"
-                    {
-                    "Name" = "8:AnalyzeLibrary.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:AnalyzeLibrary.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_795A0BB8FF7C40F986B4C56B487CC19B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E1FED6BC348B479C892F9CF418CB1E19"
             {
             "SourcePath" = "8:..\\AnalyzeForm\\resource\\GRAPH.ICO"
@@ -246,7 +203,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AnalyzeData"
         "ProductCode" = "8:{27315FD5-D68E-47B8-A54A-82E1801E16A1}"
-        "PackageCode" = "8:{05E75BC3-949B-447D-999A-E448118785E5}"
+        "PackageCode" = "8:{E249B202-6A51-4AF4-AFFD-0A40ADA84A3D}"
         "UpgradeCode" = "8:{7435303F-3771-43E8-8DFC-A6B1C18CD9D0}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

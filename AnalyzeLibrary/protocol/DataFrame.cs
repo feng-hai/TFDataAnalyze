@@ -200,7 +200,7 @@ namespace AnalyzeLibrary.protocol
                 Array.Reverse(tempContent);
                 this.frameContent = ByteUtil.byteToHexStr(tempContent);
                 this.code = this.orgStr.Substring(36, 2);
-                if (resutlStr.ToUpper() == this.code)
+                if (Int32.Parse(resutlStr, System.Globalization.NumberStyles.HexNumber)  == Int32.Parse(this.code, System.Globalization.NumberStyles.HexNumber) )
                 {
                     this.IsYes = true;
                 }
