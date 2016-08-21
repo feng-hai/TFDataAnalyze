@@ -135,9 +135,37 @@ namespace AnalyzeForm
             root.Text = DirFileHelper.GetFileName(sss);
             root.Tag = sss;
             treeView2.Nodes.Clear();
-            treeView2.Nodes.Add(root);
+            AddNode(root);
             InitTree(sss, root);
             //  MessageBox.Show("已选择文件夹:" + sss, "选择文件夹提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private delegate void SetLabelDelegate(string value);
+
+        private delegate void SetTreeViewDelegate(TreeNode value);
+        private void AddNode(TreeNode value)
+        {
+            if (this.InvokeRequired)
+            {
+                SetTreeViewDelegate d = new SetTreeViewDelegate(AddNode);
+                this.Invoke(d, new object[] { value });
+            }
+            else
+            {
+                this.treeView2.Nodes.Add (value);
+            }
+        }
+
+        private void SetText(string value)
+        {
+            if (this.InvokeRequired)
+            {
+                SetLabelDelegate d = new SetLabelDelegate(SetText);
+                this.Invoke(d, new object[] { value });
+            }
+            else
+            {
+                this.label4.Text =value;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -171,10 +199,27 @@ namespace AnalyzeForm
             analyzeData.Text = "解析中...";
 
 
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
+
+            Thread t2 = new Thread(new ParameterizedThreadStart(TestMethod));
+            t2.IsBackground = true;
+           
+
+         
+
+            t2.Start(protocolUrl);
+
+
+
+        }
+
+        public  void TestMethod(object data)
+        {
+           string protocolPath = data as string;
             string extension = ConfigurationManager.AppSettings["fileExtension"];
-            string[] test = DirFileHelper.GetFileNames(textBox1.Text,  "*."+ extension, true);
+            string[] test = DirFileHelper.GetFileNames(textBox1.Text, "*." + extension, true);
             // string[] protocols = AnalyzeLibrary.file.DirFileHelper.GetFileNames(protocolUrl, true);
-            string str = DirFileHelper.GetFileStr(protocolUrl);
+            string str = DirFileHelper.GetFileStr(protocolPath);
 
             string timeSpanInt = timeSpan.Text;
             int spanTime = 0;
@@ -182,16 +227,18 @@ namespace AnalyzeForm
             {
                 spanTime = 20;
             }
-
+        
             ManualResetEvent eventX = new ManualResetEvent(false);
-            ThreadPool.SetMaxThreads(6, 3);
+            ThreadPool.SetMaxThreads(3, 3);
 
-            ThreadFile tf = new ThreadFile(0,test.Length, eventX);
+            ThreadFile tf = new ThreadFile(0, test.Length, eventX);
 
             foreach (string dataP in test)
             {
 
                 Parameter p = new Parameter(dataP, str, spanTime, textBox2.Text);
+                p.SetValue = SetText;
+              
                 ThreadPool.QueueUserWorkItem(new WaitCallback(tf.ThreadProc), p);
 
 
@@ -213,26 +260,18 @@ namespace AnalyzeForm
 
 
 
-          
+
             //等待事件的完成，即线程调用ManualResetEvent.Set()方法
             //eventX.WaitOne  阻止当前线程，直到当前 WaitHandle 收到信号为止。 
             eventX.WaitOne(Timeout.Infinite, true);
             LoadResultFile();
-            //Console.WriteLine("断点测试");
-            //Thread.Sleep(10000);
-            //Console.WriteLine("运行结束");
-
-
-
-                
-               
-
-
             analyzeData.Enabled = true;
             analyzeData.Text = "数据解析";
 
             MessageBox.Show("数据解析完成");
-
+            //Console.WriteLine("断点测试");
+            //Thread.Sleep(10000);
+            //Console.WriteLine("运行结束");
         }
 
         private void InitTree(string file, TreeNode node)
@@ -260,10 +299,24 @@ namespace AnalyzeForm
             TreeNode node = new TreeNode();
             node.Text = DirFileHelper.GetFileName(fileName);
             node.Tag = fileName;
-            root.Nodes.Add(node);
+            AddNodeRoot(root,node);
             return node;
 
 
+        }
+
+        private delegate void SetNodeDelegate(TreeNode root,TreeNode value);
+        private void AddNodeRoot(TreeNode root,TreeNode value)
+        {
+            if (this.InvokeRequired)
+            {
+                SetNodeDelegate d = new SetNodeDelegate(AddNodeRoot);
+                this.Invoke(d, new object[] { root,value });
+            }
+            else
+            {
+                root.Nodes.Add(value);
+            }
         }
 
         private string[] loadFile(string url)
@@ -284,6 +337,11 @@ namespace AnalyzeForm
         private void button3_Click_1(object sender, EventArgs e)
         {
             LoadProtocol();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

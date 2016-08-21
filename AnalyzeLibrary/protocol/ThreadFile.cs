@@ -22,11 +22,12 @@ namespace AnalyzeLibrary.protocol
         public ManualResetEvent eventX;
         public void ThreadProc(object addr)
         {
-            Console.WriteLine("Thread[" + addr.ToString() + "]");
+           
             Parameter param = (Parameter)addr;
 
             //Thread.Sleep(2000);
             DataFrames data = new DataFrames(param.DataPath, param.ProtocolPath, param.TimeSpan);
+            param.SetValue("【"+iCount+"/"+iMaxCount+"】 正在解析："+param.DataPath);
             data.GetData();
             data.DataToArray();
 
@@ -45,6 +46,7 @@ namespace AnalyzeLibrary.protocol
             //而有些操作是不能被中断的，不然会出现无法还原的后果，这时候，这些操作就需要原子操作。
             //就是不能被中断的操作。
             Interlocked.Increment(ref iCount);
+            param.SetValue("【" + iCount + "/" + iMaxCount + "】 成功解析：" + param.DataPath);
             if (iCount == iMaxCount)
             {
                 Console.WriteLine("发出结束信号!");

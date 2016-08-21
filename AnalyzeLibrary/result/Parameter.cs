@@ -11,6 +11,8 @@ namespace AnalyzeLibrary.result
         private string protocolPath = string.Empty;
         private int timeSpan;
         private string address_save = string.Empty;
+        public  delegate void SetLabelDelegate(string value);
+        SetLabelDelegate setValue;
 
         public Parameter(string dataPath, string protocolPath, int timeSpan,string addr)
         {
@@ -69,6 +71,19 @@ namespace AnalyzeLibrary.result
             set
             {
                 address_save = value;
+            }
+        }
+
+        public  SetLabelDelegate SetValue
+        {
+            get
+            {
+                return setValue;
+            }
+
+            set
+            {
+                setValue = value;
             }
         }
     }
