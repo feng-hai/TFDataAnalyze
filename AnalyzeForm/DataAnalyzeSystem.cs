@@ -1,5 +1,6 @@
 ﻿using AnalyzeLibrary.file;
 using AnalyzeLibrary.protocol;
+using AnalyzeLibrary.result;
 using AnalyzeLibrary.Util;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-
+using System.Threading;
 using System.Windows.Forms;
 
 namespace AnalyzeForm
@@ -173,36 +174,59 @@ namespace AnalyzeForm
             string extension = ConfigurationManager.AppSettings["fileExtension"];
             string[] test = DirFileHelper.GetFileNames(textBox1.Text,  "*."+ extension, true);
             // string[] protocols = AnalyzeLibrary.file.DirFileHelper.GetFileNames(protocolUrl, true);
+            string str = DirFileHelper.GetFileStr(protocolUrl);
 
-            //  foreach(string strP in protocols)
+            string timeSpanInt = timeSpan.Text;
+            int spanTime = 0;
+            if (!int.TryParse(timeSpanInt, out spanTime))
             {
-                string str = DirFileHelper.GetFileStr(protocolUrl);
+                spanTime = 20;
+            }
 
-                string timeSpanInt = timeSpan.Text;
-                int spanTime = 0;
-                if (!int.TryParse(timeSpanInt, out spanTime))
-                {
-                    spanTime = 20;
-                }
-                foreach (string dataP in test)
-                {
-                    DataFrames data = new DataFrames(dataP, str, spanTime);
-                    data.GetData();
-                    data.DataToArray();
+            ManualResetEvent eventX = new ManualResetEvent(false);
+            ThreadPool.SetMaxThreads(6, 3);
 
-                    DateTime dt = Convert.ToDateTime(data.formateDate());
-                    if (data.ValueList.Count > 0) 
-                    {
-                        List<string[]> tempList = data.ValueList;
-                        CSVUtil.dt2csvForList(tempList, textBox2.Text + "/" + dt.ToString("yyyyMMddHHmmss") + @".CSV", "", string.Join(", ", data.Header.ToArray()));
-                        CSVUtil.GenerateWorkSheetWithSB(tempList, textBox2.Text + "/" + dt.ToString("yyyyMMddHHmmss") + @".xls", "", string.Join(", ", data.Header.ToArray()));
-                        LoadResultFile();
-                    }
+            ThreadFile tf = new ThreadFile(0,test.Length, eventX);
 
-                }
+            foreach (string dataP in test)
+            {
 
+                Parameter p = new Parameter(dataP, str, spanTime, textBox2.Text);
+                ThreadPool.QueueUserWorkItem(new WaitCallback(tf.ThreadProc), p);
+
+
+                //DataFrames data = new DataFrames(dataP, str, spanTime);
+                //data.GetData();
+                //data.DataToArray();
+
+                //DateTime dt = Convert.ToDateTime(data.formateDate());
+                //if (data.ValueList.Count > 0)
+                //{
+                //    List<string[]> tempList = data.ValueList;
+                //    CSVUtil.dt2csvForList(tempList, textBox2.Text + "/" + dt.ToString("yyyyMMddHHmmss") + @".CSV", "", string.Join(", ", data.Header.ToArray()));
+                //    CSVUtil.GenerateWorkSheetWithSB(tempList, textBox2.Text + "/" + dt.ToString("yyyyMMddHHmmss") + @".xls", "", string.Join(", ", data.Header.ToArray()));
+                //    LoadResultFile();
+                //}
 
             }
+
+
+
+
+          
+            //等待事件的完成，即线程调用ManualResetEvent.Set()方法
+            //eventX.WaitOne  阻止当前线程，直到当前 WaitHandle 收到信号为止。 
+            eventX.WaitOne(Timeout.Infinite, true);
+            LoadResultFile();
+            //Console.WriteLine("断点测试");
+            //Thread.Sleep(10000);
+            //Console.WriteLine("运行结束");
+
+
+
+                
+               
+
 
             analyzeData.Enabled = true;
             analyzeData.Text = "数据解析";

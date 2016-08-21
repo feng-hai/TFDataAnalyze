@@ -47,6 +47,8 @@
     <Compile Include="Analyze.cs" />
     <Compile Include="protocol\DataFrame.cs" />
     <Compile Include="protocol\DataFrames.cs" />
+    <Compile Include="protocol\ThreadFile.cs" />
+    <Compile Include="result\Parameter.cs" />
     <Compile Include="Util\ByteUtil.cs" />
     <Compile Include="Util\CRC16.cs" />
     <Compile Include="Util\CSVUtil.cs" />
