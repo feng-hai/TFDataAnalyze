@@ -30,14 +30,19 @@ namespace AnalyzeLibrary.protocol
             param.SetValue("【"+iCount+"/"+iMaxCount+"】 正在解析："+param.DataPath);
             data.GetData();
             data.DataToArray();
-
+            param.SetValue("【" + iCount + "/" + iMaxCount + "】 成功解析：" + param.DataPath);
             DateTime dt = Convert.ToDateTime(data.formateDate());
             if (data.ValueList.Count > 0)
             {
                 List<string[]> tempList = data.ValueList;
                 CSVUtil.dt2csvForList(tempList, param.Address_save + "/" + dt.ToString("yyyyMMddHHmmss") + @".CSV", "", string.Join(", ", data.Header.ToArray()));
-               // CSVUtil.GenerateWorkSheetWithSB(tempList, param.Address_save + "/" + dt.ToString("yyyyMMddHHmmss") + @".xls", "", string.Join(", ", data.Header.ToArray()));
-               // LoadResultFile();
+                // CSVUtil.GenerateWorkSheetWithSB(tempList, param.Address_save + "/" + dt.ToString("yyyyMMddHHmmss") + @".xls", "", string.Join(", ", data.Header.ToArray()));
+                // LoadResultFile();
+                param.SetValue("【" + iCount + "/" + iMaxCount + "】 成功解析：" + param.DataPath);
+            }
+            else {
+                List<string[]> tempList = data.ValueList;
+                CSVUtil.dt2csvForList(tempList, param.Address_save + "/" + dt.ToString("yyyyMMddHHmmss") + @".CSV", "", string.Join(", ", data.Header.ToArray()));
             }
             //Interlocked.Increment()操作是一个原子操作，作用是:iCount++ 具体请看下面说明 
             //原子操作，就是不能被更高等级中断抢夺优先的操作。你既然提这个问题，我就说深一点。
